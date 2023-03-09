@@ -33,83 +33,86 @@ class _FormScreenState extends State<FormScreen> {
           }
           if (snapshot.connectionState == ConnectionState.done) {}
           return Scaffold(
+              appBar: AppBar(title: Text('แบบฟอร์มกรอกข้อมูล')),
               body: Center(
-            child: Container(
-              padding: const EdgeInsets.all(20),
-              child: Form(
-                key: formKey,
-                child: SingleChildScrollView(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('ชื่อ', style: TextStyle(fontSize: 20)),
-                        TextFormField(
-                          validator:
-                              RequiredValidator(errorText: 'กรุณาป้อนชื่อ'),
-                          onSaved: (value) {
-                            myStudent.fname = value;
-                          },
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        const Text('นามสกุล', style: TextStyle(fontSize: 20)),
-                        TextFormField(
-                          validator:
-                              RequiredValidator(errorText: 'กรุณาป้อนนามสกุล'),
-                          onSaved: (value) {
-                            myStudent.lname = value;
-                          },
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        const Text('อีเมล', style: TextStyle(fontSize: 20)),
-                        TextFormField(
-                          validator:
-                              RequiredValidator(errorText: 'กรุณาป้อนอีเมล'),
-                          onSaved: (value) {
-                            myStudent.email = value;
-                          },
-                          keyboardType: TextInputType.emailAddress,
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        const Text('อุณหภูมิ', style: TextStyle(fontSize: 20)),
-                        TextFormField(
-                          validator:
-                              RequiredValidator(errorText: 'กรุณาป้อนอุณหภูมิ'),
-                          onSaved: (value) {
-                            myStudent.temp = value;
-                          },
-                          keyboardType: TextInputType.number,
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                textStyle: const TextStyle(fontSize: 20)),
-                            onPressed: () async {
-                              if (formKey.currentState!.validate()) {
-                                formKey.currentState!.save();
-                                await _studentCollection.add({
-                                  'fname': myStudent.fname,
-                                  'lname': myStudent.lname,
-                                  'email': myStudent.email,
-                                  'temp': myStudent.temp,
-                                });
-                                formKey.currentState?.reset();
-                              }
-                            },
-                            child: const Text('บันทึก'),
-                          ),
-                        )
-                      ]),
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  child: Form(
+                    key: formKey,
+                    child: SingleChildScrollView(
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('ชื่อ', style: TextStyle(fontSize: 20)),
+                            TextFormField(
+                              validator:
+                                  RequiredValidator(errorText: 'กรุณาป้อนชื่อ'),
+                              onSaved: (value) {
+                                myStudent.fname = value;
+                              },
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            const Text('นามสกุล',
+                                style: TextStyle(fontSize: 20)),
+                            TextFormField(
+                              validator: RequiredValidator(
+                                  errorText: 'กรุณาป้อนนามสกุล'),
+                              onSaved: (value) {
+                                myStudent.lname = value;
+                              },
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            const Text('อีเมล', style: TextStyle(fontSize: 20)),
+                            TextFormField(
+                              validator: RequiredValidator(
+                                  errorText: 'กรุณาป้อนอีเมล'),
+                              onSaved: (value) {
+                                myStudent.email = value;
+                              },
+                              keyboardType: TextInputType.emailAddress,
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            const Text('อุณหภูมิ',
+                                style: TextStyle(fontSize: 20)),
+                            TextFormField(
+                              validator: RequiredValidator(
+                                  errorText: 'กรุณาป้อนอุณหภูมิ'),
+                              onSaved: (value) {
+                                myStudent.temp = value;
+                              },
+                              keyboardType: TextInputType.number,
+                            ),
+                            SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    textStyle: const TextStyle(fontSize: 20)),
+                                onPressed: () async {
+                                  if (formKey.currentState!.validate()) {
+                                    formKey.currentState!.save();
+                                    await _studentCollection.add({
+                                      'fname': myStudent.fname,
+                                      'lname': myStudent.lname,
+                                      'email': myStudent.email,
+                                      'temp': myStudent.temp,
+                                    });
+                                    formKey.currentState?.reset();
+                                  }
+                                },
+                                child: const Text('บันทึก'),
+                              ),
+                            )
+                          ]),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ));
+              ));
         });
   }
 }
